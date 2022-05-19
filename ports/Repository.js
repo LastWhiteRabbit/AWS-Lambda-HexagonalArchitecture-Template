@@ -10,6 +10,46 @@ const getUserData = async (userId) => {
     }
 }
 
+const inputUserData = async (requestJSON) => {
+    try{
+        const data = await getUserValue.inputUserValue(requestJSON);
+        return data;
+    } catch(err) {
+        console.log(err)
+        return err
+    }
+}
+
+
+
+const deleteUserData = async (deleteId) => {
+    try{
+        const data = await getUserValue.deleteUserValue(deleteId);
+        return data;
+    } catch(err) {
+        console.log(err)
+        return err
+    }
+}
+
+
+
+const getAllUsersData = async () => {
+    try{
+        const data = await getUserValue.getAllUsersValue();
+        return data;
+    } catch(err) {
+        console.log(err)
+        return err
+    }
+}
+
+
+
+
 module.exports = {
-    getUserData
+    getUserData,
+    getAllUsersData,
+    deleteUserData,
+    inputUserData
 }
