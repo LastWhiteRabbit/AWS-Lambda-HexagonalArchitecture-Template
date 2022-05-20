@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-
+const { fromString } = require('uuidv4');
 
 const documentClient = new AWS.DynamoDB.DocumentClient();
 const USERS_TABLE = process.env.USERS_TABLE;
@@ -31,7 +31,7 @@ const inputUserValue = async (requestJSON) => {
       const userData = await documentClient.put({
         TableName: USERS_TABLE,
         Item: {
-          'userId': requestJSON.userId,
+          'userId': fromString(requestJSON.userId),
           name: requestJSON.name
         }
       }).promise()

@@ -27,22 +27,25 @@ exports.lambdaHandler = async (event) => {
       case "GET /users/{id}":
         const getid = event.pathParameters.id;
         body = await getUser.getUsersRequest(getid);
+        //if(JSON.stringify(body) === '{}')
+        //statusCode = 404;
         break;
 
       case "GET /users":
         body = await getAllUsers.getAllUsersRequest();
         break;
+        
       case "DELETE /users/{id}":
         const deleteId = event.pathParameters.id;
         await deleteUser.deleteUserRequest(deleteId);
         body = `Deleted item ${event.pathParameters.id}`;
         break;
 
-        case "PUT /users":
-          let requestJSON = JSON.parse(event.body);
-          await inputUser.inputUserRequest(requestJSON);
-          body = `Put item ${requestJSON.userId}`;
-          break;
+      case "PUT /users":
+        let requestJSON = JSON.parse(event.body);
+        await inputUser.inputUserRequest(requestJSON);
+        body = `Put item ${requestJSON.userId}`;
+        break;
 
       default:
         throw new Error(`Unsupported route: "${event.routeKey}"`);
