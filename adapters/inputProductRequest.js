@@ -1,12 +1,12 @@
 const HTTPHandler = require("../ports/HTTPHandler")
 
 
-async function inputUserRequest(requestJSON){
+async function inputProductRequest(requestJSON){
     let res;
     try {   
-        const usersData = await HTTPHandler.inputUser(requestJSON)
+        const productData = await HTTPHandler.inputProduct(requestJSON)
         
-        res = usersData;
+        res = productData;
 
 
     } catch (err) {
@@ -18,4 +18,4 @@ async function inputUserRequest(requestJSON){
 } 
 
 module.exports = {  
-    inputUserRequest }
+    inputProductRequest }

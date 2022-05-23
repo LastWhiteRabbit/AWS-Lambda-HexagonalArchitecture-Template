@@ -1,9 +1,9 @@
-const stock = require("../domains/UsersLogic");
+const products = require("../domains/ProductsLogic");
 
-const retrieveUser = async (userId) => {
+const retrieveProduct = async (productId) => {
     try{
-        const user = await stock.retrieveUserValues(userId)
-        return user;
+        const product = await products.retrieveProductValues(productId)
+        return product;
     }
     catch(err){
         console.log(err)
@@ -11,10 +11,10 @@ const retrieveUser = async (userId) => {
     }
 }
 
-const inputUser = async (requestJSON) => {
+const inputProduct = async (requestJSON) => {
     try{
-        const user = await stock.inputUserValues(requestJSON)
-        return user;
+        const product = await products.inputProductValues(requestJSON)
+        return product;
     }
     catch(err){
         console.log(err)
@@ -24,10 +24,10 @@ const inputUser = async (requestJSON) => {
 
 
 
-const retrieveAllUsers = async () => {
+const retrieveAllProducts = async () => {
     try{
-        const users = await stock.retrieveAllUsersValues()
-        return users;
+        const allProducts = await products.retrieveAllProductsValues();
+        return allProducts;
     }
     catch(err){
         console.log(err)
@@ -35,10 +35,10 @@ const retrieveAllUsers = async () => {
     }
 }
 
-const deleteUser = async (deleteId) => {
+const deleteProduct = async (deleteId) => {
     try{
-        const user = await stock.deleteUserValues(deleteId)
-        return user;
+        const product = await products.deleteProductValues(deleteId)
+        return product;
     }
     catch(err){
         console.log(err)
@@ -50,8 +50,8 @@ const deleteUser = async (deleteId) => {
 
 
 module.exports = {
-    retrieveUser,
-    retrieveAllUsers,
-    deleteUser,
-    inputUser
+    retrieveProduct,
+    retrieveAllProducts,
+    deleteProduct,
+    inputProduct
 }

@@ -1,7 +1,7 @@
-const getUser = require("./adapters/getUsersRequest.js")
-const getAllUsers = require("./adapters/getAllUsersRequest.js")
-const deleteUser = require("./adapters/deleteUserRequest.js")
-const inputUser = require("./adapters/inputUserRequest.js")
+const getProduct = require("./adapters/getProductsRequest.js")
+const getAllProducts = require("./adapters/getAllProductsRequest.js")
+const deleteProduct = require("./adapters/deleteProductRequest.js")
+const inputProduct = require("./adapters/inputProductRequest.js")
 const { json } = require("express/lib/response")
 
 
@@ -24,27 +24,27 @@ exports.lambdaHandler = async (event) => {
 
   try {
     switch (event.routeKey) {
-      case "GET /users/{id}":
+      case "GET /products/{id}":
         const getid = event.pathParameters.id;
-        body = await getUser.getUsersRequest(getid);
-        //if(JSON.stringify(body) === '{}')
-        //statusCode = 404;
+        body = await getProduct.getProductsRequest(getid);
+        if(JSON.stringify(body) === '{}')
+        statusCode = 204;
         break;
 
-      case "GET /users":
-        body = await getAllUsers.getAllUsersRequest();
+      case "GET /products":
+        body = await getAllProducts.getAllProductsRequest();
         break;
         
-      case "DELETE /users/{id}":
+      case "DELETE /products/{id}":
         const deleteId = event.pathParameters.id;
-        await deleteUser.deleteUserRequest(deleteId);
+        await deleteProduct.deleteProductRequest(deleteId);
         body = `Deleted item ${event.pathParameters.id}`;
         break;
 
-      case "PUT /users":
+      case "PUT /products":
         let requestJSON = JSON.parse(event.body);
-        await inputUser.inputUserRequest(requestJSON);
-        body = `Put item ${requestJSON.userId}`;
+        await inputProduct.inputProductRequest(requestJSON);
+        body = `Put item ${requestJSON.productId}`;
         break;
 
       default:

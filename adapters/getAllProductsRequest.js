@@ -1,12 +1,12 @@
 const HTTPHandler = require("../ports/HTTPHandler")
 
 
-async function deleteUserRequest(deleteId){
+async function getAllProductsRequest(){
     let res;
     try {   
-        const usersData = await HTTPHandler.deleteUser(deleteId)
+        const productsData = await HTTPHandler.retrieveAllProducts()
         
-        res = usersData;
+        res = productsData;
 
 
     } catch (err) {
@@ -18,5 +18,4 @@ async function deleteUserRequest(deleteId){
 } 
 
 module.exports = {  
-    deleteUserRequest }
-
+    getAllProductsRequest }
