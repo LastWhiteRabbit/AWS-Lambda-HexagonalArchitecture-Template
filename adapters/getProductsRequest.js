@@ -1,14 +1,14 @@
 const HTTPHandler = require("../ports/HTTPHandler")
 
 
-async function getUsersRequest(userId){
+async function getProductsRequest(productId){
     let res;
     try {   
-        const userData = await HTTPHandler.retrieveUser(userId)
+        const productData = await HTTPHandler.retrieveProduct(productId)
         
         res = {
             'statusCode': 200,
-            'body': JSON.stringify(userData)
+            'body': JSON.stringify(productData)
         }
         if (res == null){
             res = {
@@ -24,4 +24,4 @@ async function getUsersRequest(userId){
     return res;
 } 
 
-module.exports = { getUsersRequest }
+module.exports = { getProductsRequest }
