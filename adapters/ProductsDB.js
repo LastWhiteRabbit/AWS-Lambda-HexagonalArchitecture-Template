@@ -16,6 +16,10 @@ const getProductValue = async (productId = "1") => {
 
   try {
       const productData = await documentClient.get(params).promise()
+      
+      console.log("ProductsDB.js productValue ->");
+      console.log(productData);
+
       return productData
   }
   catch (err) {

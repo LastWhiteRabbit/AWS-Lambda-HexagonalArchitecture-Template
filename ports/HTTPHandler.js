@@ -1,8 +1,12 @@
 const products = require("../domains/ProductsLogic");
 
-const retrieveProduct = async (productId) => {
+const retrieveProduct = async (productId, query = undefined) => {
     try{
-        const product = await products.retrieveProductValues(productId)
+        const product = await products.retrieveProductValues(productId, query)
+
+        console.log("HTTPHandler.js res ->");
+        console.log(product);
+
         return product;
     }
     catch(err){

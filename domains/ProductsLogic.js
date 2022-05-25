@@ -1,11 +1,31 @@
 const Repository = require("../ports/Repository");
+const Rate = require("../ports/CurrenciesService.js")
 
-const retrieveProductValues = async (productId) => {
+const retrieveProductValues = async (productId, query = undefined) => {
     try{
         const productValue = await Repository.getProductData(productId);
-        console.log(productValue)
-        
 
+        console.log("ProductLogic.js productValue ->");
+        console.log(productValue);
+
+        console.log("ProductLogic.js query ->");
+        console.log(query);
+
+        if(query!=undefined){
+
+            const rateValue = await Rate.getRateData(query);
+  
+            const temp = rateValue.rates[query];
+            console.log("currency rate stringify-->");
+            console.log(temp);
+
+            productValue.Item.price = productValue.Item.price * temp;
+            console.log("productValue rate stringify-->");
+            console.log(productValue);
+
+            console.log("currency rate-->");
+            console.log(rateValue.rates.AED);
+        }
         return productValue;
 
     } catch(err) {

@@ -25,11 +25,36 @@ exports.lambdaHandler = async (event) => {
   try {
     switch (event.routeKey) {
       case "GET /products/{id}":
+
         const getid = event.pathParameters.id;
-        body = await getProduct.getProductsRequest(getid);
+
+
+        if(event.queryStringParameters !== null && event.queryStringParameters !== undefined){
+
+          if(currencyValidate(event.queryStringParameters?.currency)){
+            console.log(`currency works ${event.queryStringParameters?.currency}`);
+            
+            body = await getProduct.getProductsRequest(getid,event.queryStringParameters?.currency );
+
+          }
+          else{
+            return {
+              'statusCode' : 400,
+              'body': JSON.stringify({message: 'Invalid currency!'})
+              }
+          }
+
+        }
+
+        body = await getProduct.getProductsRequest(getid,event.queryStringParameters?.currency);
+        console.log("handler.js body -->");
+        console.log(body);
+
+
         if(JSON.stringify(body) === '{}')
-        statusCode = 204;
+          statusCode = 204;
         break;
+
 
       case "GET /products":
         body = await getAllProducts.getAllProductsRequest();
@@ -66,3 +91,15 @@ exports.lambdaHandler = async (event) => {
 
 }
 
+
+function currencyValidate(currency){
+  const CURRENCIES = ["USD", "CAD", "AUD"];
+
+  if(CURRENCIES.find(x => x == currency)){
+    console.log("Currency bool-->");
+    console.log(CURRENCIES.find(x => x == currency));
+    return true;
+  }
+
+  return false;
+}

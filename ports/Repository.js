@@ -3,6 +3,10 @@ const getProductValue = require("../adapters/ProductsDB");
 const getProductData = async (productId) => {
     try{
         const data = await getProductValue.getProductValue(productId);
+        
+        console.log("Repository.js data ->");
+        console.log(data);
+
         return data;
     } catch(err) {
         console.log(err)
