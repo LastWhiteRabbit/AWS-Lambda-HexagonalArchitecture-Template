@@ -1,10 +1,10 @@
 const HTTPHandler = require("../ports/HTTPHandler")
 
 
-async function getProductsRequest(productId){
+async function getProductsRequest(productId, query = undefined){
     let res;
     try {   
-        const productData = await HTTPHandler.retrieveProduct(productId)
+        const productData = await HTTPHandler.retrieveProduct(productId, query)
         
         res = {
             'statusCode': 200,
@@ -15,6 +15,8 @@ async function getProductsRequest(productId){
                 'statusCode': 404
             }
         }
+        console.log("getProductsRequest.js res ->");
+        console.log(res);
 
     } catch (err) {
         console.log(err);
